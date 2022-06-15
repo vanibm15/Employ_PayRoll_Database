@@ -20,15 +20,16 @@ public class EmpRollSql {
             con = DriverManager.getConnection(jdbcURL, username, password);
             System.out.println("connection done successful!!" + con);
             Statement statement = con.createStatement();
-
-            ResultSet resultSet = statement.executeQuery("select * from employee");
+            statement.executeUpdate("insert into employee(name,salary,department, joining_date) values ('vani',400000, 'cs-engg','2020-12-09')," +
+                    "('Praveen',50000, 'mech-engg','2018-09-06'),('Shreyas',600000, 'ee-engg','2023-11-08'),('Varsh',900000, 'IT','2001-06-07')");
+            ResultSet resultSet = statement.executeQuery("select * from employee;");
             while (resultSet.next())
             {
                 System.out.println("id:" + resultSet.getInt("id"));
                 System.out.println("name:" + resultSet.getString("name"));
-                System.out.println("salary:" + resultSet.getString("salary"));
-                System.out.println("department:" + resultSet.getDate("department"));
-                System.out.println("Joining_Date:" + resultSet.getDouble("Joining_Date"));
+                System.out.println("salary:" + resultSet.getDouble("salary"));
+                System.out.println("department:" + resultSet.getString("department"));
+                System.out.println("Joining_Date:" + resultSet.getDate("Joining_Date"));
 
 
             }
