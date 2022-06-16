@@ -12,53 +12,22 @@ public class EmpRollSql {
         } catch (ClassNotFoundException e) {
             throw new IllegalStateException("cannot find the driver in the classpath!", e);
         }
-//        try {
-//            System.out.println("connecting to database:" + jdbcURL);
-//            con = DriverManager.getConnection(jdbcURL, username, password);
-//            System.out.println("connection done successful!!" + con);
-        // Statement statement = con.createStatement();
-////           statement.executeUpdate("insert into employee(name,salary,department, joining_date) values ('vani',400000, 'cs-engg','2020-12-09')," +
-////                    "('Praveen',50000, 'mech-engg','2018-09-06'),('Shreyas',600000, 'ee-engg','2023-11-08'),('Varsh',900000, 'IT','2001-06-07')");
-//           statement.executeUpdate("alter table employee add column Gender varchar(7);");
-//            ResultSet resultSet = statement.executeQuery("select * from employee where Joining_Date between '2001-06-08' and '2018-09-06'");
-//            while (resultSet.next())
-//            {
-//                System.out.println("id:" + resultSet.getInt("id"));
-//                System.out.println("name:" + resultSet.getString("name"));
-//                System.out.println("salary:" + resultSet.getDouble("salary"));
-//                System.out.println("department:" + resultSet.getString("department"));
-//                System.out.println("Joining_Date:" + resultSet.getDate("Joining_Date"));
-        //  PreparedStatement preparedStatement=con.prepareStatement("alter table add column "+"Gender varchar(7)");
-
         try {
             System.out.println("connecting to database:" + jdbcURL);
             con = DriverManager.getConnection(jdbcURL, username, password);
             System.out.println("connection done successful!!" + con);
-//            Statement statement=con.createStatement();
-//            statement.execute("alter table employee add column Gender varchar(7)");
-//            ResultSet resultSet =statement.executeQuery("select * from employee");
-//            while(resultSet.next()){
-//                System.out.println("id:"+resultSet.getInt("id"));
-//                System.out.println("name:"+resultSet.getString("name"));
-//                System.out.println("salary:"+resultSet.getDouble("salary"));
-//                System.out.println("department:"+resultSet.getString("department"));
-//                System.out.println("Joining_Date:"+resultSet.getDate("Joining_Date"));
-//            }
-            PreparedStatement preparedStatement = con.prepareStatement("update employee set Gender " +
-                    "Gender varchar(7)");
-            ResultSet resultSet = preparedStatement.executeQuery("select * from employee");
-            while (resultSet.next()) {
-                System.out.println("id:" + resultSet.getInt("id"));
-                System.out.println("name:" + resultSet.getString("name"));
-                System.out.println("salary:" + resultSet.getDouble("salary"));
-                System.out.println("department:" + resultSet.getString("department"));
-                System.out.println("Joining_Date:" + resultSet.getDate("Joining_Date"));
-
-           //     System.out.println("Gender:" +resultSet.getString("Gender"));
-
+           Statement statement=con.createStatement();
+           statement.execute("create table employee(id int auto_increment,name varchar(30),\n" +
+                   "salary double,department varchar(30),Joining_Date date,\n" +
+                   "primary key(id))");
+            ResultSet resultSet =statement.executeQuery("desc employee;");
+            while(resultSet.next()){
+                System.out.println("id:"+resultSet.getInt("id"));
+                System.out.println("name:"+resultSet.getString("name"));
+                System.out.println("salary:"+resultSet.getDouble("salary"));
+                System.out.println("department:"+resultSet.getString("department"));
+                System.out.println("Joining_Date:"+resultSet.getDate("Joining_Date"));
             }
-
-
         } catch (SQLException ex) {
             //throw new RuntimeException(ex);
         }
